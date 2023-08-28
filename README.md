@@ -20,3 +20,5 @@ const parent= React.createElement(
 const heading= React.createElement("h1",{id:"heading"},"Hello World");
 
 ```
+- Transitive dependencies-> ` Dependencies of package on package `
+- added parcel 
