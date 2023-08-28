@@ -1,9 +1,3 @@
-# namasteReact
-
-## Day -1
-- Learned how to add react directly to html
-- Learned on how to use `React.CreateElement`  in 2 different ways consisting of childrens and sibling elements
-``` 
 const parent= React.createElement(
 "div",
 {id:"parent"},
@@ -19,4 +13,6 @@ const parent= React.createElement(
 
 const heading= React.createElement("h1",{id:"heading"},"Hello World");
 
-```
+const root= ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(parent)
