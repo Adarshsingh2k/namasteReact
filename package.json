@@ -2,7 +2,7 @@
   "name": "namastereact",
   "version": "1.0.0",
   "description": "Learning react",
-  "main": "app.js",
+  
   "scripts": {
     "test": "jest"
   },
@@ -23,6 +23,14 @@
   },
   "homepage": "https://github.com/Adarshsingh2k/namasteReact#readme",
   "devDependencies": {
-    "parcel": "^2.9.3"
-  }
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserList":[
+    "last 5 versions"
+  ]
 }
