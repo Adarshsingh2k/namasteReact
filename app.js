@@ -1,21 +1,11 @@
 import React from "react"
 import  ReactDOM  from "react-dom/client"
 
-const parent= React.createElement(
-"div",
-{id:"parent"},
-    React.createElement(
-        "div",
-        {id:"child"},
-       [ React.createElement("h1",{},"Nested H1 Tag"),
-       React.createElement("h4",{},"I am a H2 tag")
-    ]
+// JSX is TRanspilled to JS Using-> PARCEL  which uses-> Babel
 
-    )
-)
+// BABEL transpiles to React.createElement => ReactElement - which is a JS Object =>Rendered as HTML Element
 
-const heading= React.createElement("h1",{id:"heading"},"Hello World");
+const heading=(<h1 className="heading">We Are up using JSX </h1>);
 
 const root= ReactDOM.createRoot(document.getElementById('root'));
-
-root.render(parent)
+root.render(heading)
