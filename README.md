@@ -53,7 +53,7 @@ const heading= React.createElement("h1",{id:"heading"},"Hello World");
     }
 ```
 
-### Way 3
+### Way 2
 
 ```
 const Title=()=>(
@@ -82,3 +82,16 @@ const HeadingComponent= ()=>(
 // root.render(heading) --> we render React element  Like this
 root.render(<HeadingComponent/>) // We render React component like this
 ```
+
+#### Inline styles
+- give style as js object
+
+```
+const styleC={
+    color: black;
+}
+<h1 style={styleC}>Check Me</h1>
+<h1 style={{color: black;}}>Check Me</h1>
+
+```
+- both above ways are correct but not preferd to write inline css
