@@ -18,10 +18,32 @@
 
 .res-card{
     width:200px;
-    height:200px;
+    height:auto;
+    margin: 5px;
+    padding: 10px;
+}
+.res-card > img{
+    width: 200px;
+    height: 130px;
+}
+.res-card-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.res-card:hover{
     border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .search{
     padding: 10px;
+}
+
+.res-container{
+    display: flex;
+    flex-wrap: wrap;
+    
+
 }
