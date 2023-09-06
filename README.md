@@ -95,3 +95,53 @@ const styleC={
 
 ```
 - both above ways are correct but not preferd to write inline css
+
+## working with Props 🐱‍🚀
+- Passing prop  to a component is same as passing args to Function
+- So props is used to pass data across component
+
+`Syntax`
+```
+{resObj.map(data => (
+ <RestaurantCard key={data.info.id} resInfo={data.info} />
+))}
+
+```
+- in this code resInfo is a prop
+
+
+```
+`consuming Prop`
+
+const RestaurantCard=(props)=>{
+   const {resInfo}=props
+
+   // destructuring data from props
+   const {avgRating,  
+          areaName,
+          cloudinaryImageId,
+          costForTwo,
+          cuisines,
+          isOpen,
+          name
+
+         }=resInfo
+
+  return(  
+            <div className="res-card">
+                <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+cloudinaryImageId}/>
+               <div className="res-card-header">
+                    <h3>{name}</h3>  
+                    <h5>{avgRating}⭐</h5>
+
+               </div>
+                <h4>{costForTwo}</h4>
+                <h5>{cuisines.join(", ")}</h5>
+        
+            </div>
+    )
+}
+
+```
+
+- It is important to pass key when we rendera component in a loop  because if won't react will rerender the component
