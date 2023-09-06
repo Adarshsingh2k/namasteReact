@@ -148,7 +148,7 @@ const RestaurantCard=(props)=>{
 >  It is important to pass key when we rendera component in a loop  because if won't react will rerender the component
 
 ## Day 4
-> React Hooks
+>>> React Hooks
 
 1. **useState**
 - useState hook is a utility function which help us to keep our Data Layer and UI Layer Synchronized
