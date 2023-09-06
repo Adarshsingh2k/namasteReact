@@ -148,54 +148,54 @@ const RestaurantCard=(props)=>{
 >  It is important to pass key when we rendera component in a loop  because if won't react will rerender the component
 
 ## Day 4
->>> React Hooks
+> ## **React Hooks**
 
 1. **useState**
-- useState hook is a utility function which help us to keep our Data Layer and UI Layer Synchronized
+    - useState hook is a utility function which help us to keep our Data Layer and UI Layer Synchronized
 
-`in simple JS`
-```
-let ResList=[]; // we Declare or intialise like this
+    `in simple JS`
+    ```
+    let ResList=[]; // we Declare or intialise like this
 
-// to update it we do
-ResList=['abc'] or ResList.push(abc) 
-    
-```
-- this above way will update data but our ui wont get updated
+    // to update it we do
+    ResList=['abc'] or ResList.push(abc) 
+        
+    ```
+    - this above way will update data but our ui wont get updated
 
-`in React `
-```
-  const [resList, setResList]= useState(resObj); // => use usestate to declare array and setReslist to update it whenever needed
+    `in React `
+    ```
+    const [resList, setResList]= useState(resObj); // => use usestate to declare array and setReslist to update it whenever needed
 
-  const Body=()=>{
+    const Body=()=>{
 
-    const [resList, setResList]= useState(resObj);
+        const [resList, setResList]= useState(resObj);
 
-    // const filterRes=()=>{
-    //    return setResList( resObj.filter((data)=>{
-    //       if(data.info.avgRating>4){
-    //         return <RestaurantCard key={data.info.id} resInfo={data.info} ></RestaurantCard>
-    //       }
-    //     }))
-    // }  ==> This also works correctly
+        // const filterRes=()=>{
+        //    return setResList( resObj.filter((data)=>{
+        //       if(data.info.avgRating>4){
+        //         return <RestaurantCard key={data.info.id} resInfo={data.info} ></RestaurantCard>
+        //       }
+        //     }))
+        // }  ==> This also works correctly
 
-    const filterRes = () => {
-        const topRated = resObj.filter(data => data.info.avgRating > 4);
-        setResList(topRated); // Update state with filtered restaurants
-    }
-    return(
-        <div className="body">
-            <div className="search">Search</div>
-            <button onClick={()=>{filterRes()}} className="filter-btn">Top 🌟 Restaurants</button>
-            <div className="res-container">
+        const filterRes = () => {
+            const topRated = resObj.filter(data => data.info.avgRating > 4);
+            setResList(topRated); // Update state with filtered restaurants
+        }
+        return(
+            <div className="body">
+                <div className="search">Search</div>
+                <button onClick={()=>{filterRes()}} className="filter-btn">Top 🌟 Restaurants</button>
+                <div className="res-container">
+                    
+                {resList.map(data => (
+                        <RestaurantCard key={data.info.id} resInfo={data.info} />
+                    ))}
                 
-            {resList.map(data => (
-                    <RestaurantCard key={data.info.id} resInfo={data.info} />
-                ))}
-               
+                </div>
             </div>
-        </div>
-    )
-}
+        )
+    }
 
-```
+    ```
