@@ -144,4 +144,5 @@ const RestaurantCard=(props)=>{
 
 ```
 
-- It is important to pass key when we rendera component in a loop  because if won't react will rerender the component
+> [!IMPORTANT]
+>  It is important to pass key when we rendera component in a loop  because if won't react will rerender the component
