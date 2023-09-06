@@ -199,24 +199,33 @@ const RestaurantCard=(props)=>{
     }
 
     ```
-    >[!Algorithm_Behind_this]
+    >[!IMPORTANT]
+    > React's Reconciliation Process
 
-        React's reconciliation is the process by which React updates the DOM. It's a key part of how React efficiently handles changes to the application's state and props and then renders the UI.
+    React's reconciliation is the process by which React updates the DOM. This is crucial for React to efficiently handle changes in the application's state and props and update the UI accordingly.
 
-        Here's a high-level overview:
+    ### 1. Virtual DOM
 
-        1. **Virtual DOM**: React maintains a virtual representation of the DOM called the Virtual DOM. When a change occurs in a component's state or props, React creates a new Virtual DOM tree.
+    React maintains a virtual representation of the DOM, known as the **Virtual DOM**. When a change occurs in a component's state or props, React creates a new Virtual DOM tree.
 
-        2. **Diffing**: React then compares this new Virtual DOM tree with the previous one. This process is called "diffing". By doing this, React identifies what has changed between the two trees.
+    ### 2. Diffing
 
-        3. **Minimal Updates**: After the diffing process, React has a list of changes. Instead of re-rendering the entire application, React will only update the parts of the real DOM that have changed. This selective update mechanism makes React efficient.
+    React then compares this new Virtual DOM tree with the previous one in a process called **diffing**. Through this comparison, React determines what has changed between the two trees.
 
-        4. **Component Lifecycle**: As part of the reconciliation, React adheres to the component lifecycle. Methods like `shouldComponentUpdate` can be used to optimize and skip parts of the reconciliation process if we know a component hasn't changed.
+    ### 3. Minimal Updates
 
-        5. **Keys**: When rendering a list of elements derived from an array, React uses the `key` prop to identify each element uniquely. This helps React maintain and reuse DOM nodes correctly during the reconciliation process. It's why you often see warnings if you don't provide a `key` prop when mapping over an array to produce JSX.
+    After the diffing process, React identifies the changes and instead of re-rendering the entire application, it **updates only the segments** of the real DOM that have changed. This ensures React's efficiency.
 
-        6. **Algorithm**: The reconciliation algorithm is `O(n)` where `n` is the number of elements in the tree. This is a simplified model, but in practice, it allows React to be incredibly fast and efficient.
+    ### 4. Component Lifecycle
 
-        The whole idea behind reconciliation is to ensure that only the minimal necessary updates are made to the real DOM. Updating the real DOM is often the slowest part of the process, so by minimizing these updates, React ensures that applications remain responsive and fluid.
+    During reconciliation, React adheres to the **component lifecycle**. Methods like `shouldComponentUpdate` can be used to optimize and possibly skip parts of the reconciliation process if we determine a component hasn't changed.
 
-        It's worth noting that reconciliation is different from rendering. Rendering is the process by which React constructs the new Virtual DOM tree. Reconciliation, on the other hand, is the process of comparing this new tree with the old one and making the necessary DOM updates.
+    ### 5. Keys
+
+    When rendering a list of elements from an array, React uses the `key` prop to uniquely identify each element. This helps React in preserving and reusing DOM nodes correctly during the reconciliation process. It's essential to provide a `key` prop when mapping over an array to generate JSX.
+
+    ### 6. Algorithm
+
+    The reconciliation algorithm is efficient, standing at `O(n)`, where `n` is the number of elements in the tree. This allows React to be incredibly fast and efficient.
+
+    > **Note:** It's essential to differentiate between reconciliation and rendering. Rendering is the process by which React creates the new Virtual DOM tree. Reconciliation, on the other hand, involves comparing this new tree with the previous one and making the necessary DOM updates.
