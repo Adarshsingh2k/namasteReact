@@ -1,9 +1,11 @@
 # namasteReact
 
 ## Day - 1
+
 - Learned how to add react directly to html
-- Learned on how to use `React.CreateElement`  in 2 different ways consisting of childrens and sibling elements
-``` 
+- Learned on how to use `React.CreateElement` in 2 different ways consisting of childrens and sibling elements
+
+```
 const parent= React.createElement(
 "div",
 {id:"parent"},
@@ -20,15 +22,16 @@ const parent= React.createElement(
 const heading= React.createElement("h1",{id:"heading"},"Hello World");
 
 ```
-- Transitive dependencies-> ` Dependencies of package on package `
-- added parcel 
+
+- Transitive dependencies-> `Dependencies of package on package`
+- added parcel
 
 ## Day - 2
 
 - Run App using Parcel- npx parcel index.html
 - Added BrowserList
 - React.createElement => ReactElement - which is a JS Object =>Rendered as HTML Element
-- JSX is TRanspilled to JS Using-> PARCEL  which uses-> Babel
+- JSX is TRanspilled to JS Using-> PARCEL which uses-> Babel
 - BABEL transpiles to React.createElement => ReactElement - which is a JS Object =>Rendered as HTML Element
 
 `Usage of JSX`
@@ -41,12 +44,15 @@ const heading= React.createElement("h1",{id:"heading"},"Hello World");
     const root= ReactDOM.createRoot(document.getElementById('root'));
     root.render(heading)
 ```
+
 ## Day 3
 
 - Learned How to write functional Components and how using JSX we can excute Js inside functional component
 
 `Different ways of writting Functional Components`
+
 ### Way 1
+
 ```
  const Comp=()=>{
         return <h1> Pass this arrow Func</h1>
@@ -58,12 +64,13 @@ const heading= React.createElement("h1",{id:"heading"},"Hello World");
 ```
 const Title=()=>(
     <h1 className="heading">
-        We Are up using JSX 
+        We Are up using JSX
     </h1>
 );
 ```
 
 - Learned component Composition and how to render react component
+
 ```
 const HeadingComponent= ()=>(
     <div id="container">
@@ -78,12 +85,14 @@ const HeadingComponent= ()=>(
 ```
 
 `Rendering React Component`
+
 ```
 // root.render(heading) --> we render React element  Like this
 root.render(<HeadingComponent/>) // We render React component like this
 ```
 
 #### Inline styles
+
 - give style as js object
 
 ```
@@ -94,21 +103,24 @@ const styleC={
 <h1 style={{color: black;}}>Check Me</h1>
 
 ```
+
 - both above ways are correct but not preferd to write inline css
 
 ## working with Props 🐱‍🚀
-- Passing prop  to a component is same as passing args to Function
+
+- Passing prop to a component is same as passing args to Function
 - So props is used to pass data across component
 
 `Syntax`
+
 ```
 {resObj.map(data => (
  <RestaurantCard key={data.info.id} resInfo={data.info} />
 ))}
 
 ```
-- in this code resInfo is a prop
 
+- in this code resInfo is a prop
 
 ```
 `consuming Prop`
@@ -117,7 +129,7 @@ const RestaurantCard=(props)=>{
    const {resInfo}=props
 
    // destructuring data from props
-   const {avgRating,  
+   const {avgRating,
           areaName,
           cloudinaryImageId,
           costForTwo,
@@ -127,17 +139,17 @@ const RestaurantCard=(props)=>{
 
          }=resInfo
 
-  return(  
+  return(
             <div className="res-card">
                 <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+cloudinaryImageId}/>
                <div className="res-card-header">
-                    <h3>{name}</h3>  
+                    <h3>{name}</h3>
                     <h5>{avgRating}⭐</h5>
 
                </div>
                 <h4>{costForTwo}</h4>
                 <h5>{cuisines.join(", ")}</h5>
-        
+
             </div>
     )
 }
@@ -145,96 +157,120 @@ const RestaurantCard=(props)=>{
 ```
 
 > [!IMPORTANT]
->  It is important to pass key when we rendera component in a loop  because if won't react will rerender the component
+> It is important to pass key when we rendera component in a loop because if won't react will rerender the component
 
 ## Day 4
->  **React Hooks** 🚀
+
+> **React Hooks** 🚀
 
 1. **useState**
-    - useState hook is a utility function which help us to keep our Data Layer and UI Layer Synchronized
 
-    `in simple JS`
-    ```
-    let ResList=[]; // we Declare or intialise like this
+   - useState hook is a utility function which help us to keep our Data Layer and UI Layer Synchronized
 
-    // to update it we do
-    ResList=['abc'] or ResList.push(abc) 
-        
-    ```
-    - this above way will update data but our ui wont get updated
+   `in simple JS`
 
-    `in React `
-    ```
-    const [resList, setResList]= useState(resObj); // => use usestate to declare array and setReslist to update it whenever needed
+   ```
+   let ResList=[]; // we Declare or intialise like this
 
-    const Body=()=>{
+   // to update it we do
+   ResList=['abc'] or ResList.push(abc)
 
-        const [resList, setResList]= useState(resObj);
+   ```
 
-        // const filterRes=()=>{
-        //    return setResList( resObj.filter((data)=>{
-        //       if(data.info.avgRating>4){
-        //         return <RestaurantCard key={data.info.id} resInfo={data.info} ></RestaurantCard>
-        //       }
-        //     }))
-        // }  ==> This also works correctly
+   - this above way will update data but our ui wont get updated
 
-        const filterRes = () => {
-            const topRated = resObj.filter(data => data.info.avgRating > 4);
-            setResList(topRated); // Update state with filtered restaurants
-        }
-        return(
-            <div className="body">
-                <div className="search">Search</div>
-                <button onClick={()=>{filterRes()}} className="filter-btn">Top 🌟 Restaurants</button>
-                <div className="res-container">
-                    
-                {resList.map(data => (
-                        <RestaurantCard key={data.info.id} resInfo={data.info} />
-                    ))}
-                
-                </div>
-            </div>
-        )
-    }
+   `in React `
 
-    ```
-    >[!IMPORTANT]
-    > React's Reconciliation Process
+   ```
+   const [resList, setResList]= useState(resObj); // => use usestate to declare array and setReslist to update it whenever needed
 
-    React's reconciliation is the process by which React updates the DOM. This is crucial for React to efficiently handle changes in the application's state and props and update the UI accordingly.
+   const Body=()=>{
 
-    ### 1. Virtual DOM
+       const [resList, setResList]= useState(resObj);
 
-    React maintains a virtual representation of the DOM, known as the **Virtual DOM**. When a change occurs in a component's state or props, React creates a new Virtual DOM tree.
+       // const filterRes=()=>{
+       //    return setResList( resObj.filter((data)=>{
+       //       if(data.info.avgRating>4){
+       //         return <RestaurantCard key={data.info.id} resInfo={data.info} ></RestaurantCard>
+       //       }
+       //     }))
+       // }  ==> This also works correctly
 
-    ### 2. Diffing
+       const filterRes = () => {
+           const topRated = resObj.filter(data => data.info.avgRating > 4);
+           setResList(topRated); // Update state with filtered restaurants
+       }
+       return(
+           <div className="body">
+               <div className="search">Search</div>
+               <button onClick={()=>{filterRes()}} className="filter-btn">Top 🌟 Restaurants</button>
+               <div className="res-container">
 
-    React then compares this new Virtual DOM tree with the previous one in a process called **diffing**. Through this comparison, React determines what has changed between the two trees.
+               {resList.map(data => (
+                       <RestaurantCard key={data.info.id} resInfo={data.info} />
+                   ))}
 
-    ### 3. Minimal Updates
+               </div>
+           </div>
+       )
+   }
 
-    After the diffing process, React identifies the changes and instead of re-rendering the entire application, it **updates only the segments** of the real DOM that have changed. This ensures React's efficiency.
+   ```
 
-    ### 4. Component Lifecycle
+   > [!IMPORTANT]
+   > React's Reconciliation Process
 
-    During reconciliation, React adheres to the **component lifecycle**. Methods like `shouldComponentUpdate` can be used to optimize and possibly skip parts of the reconciliation process if we determine a component hasn't changed.
+   React's reconciliation is the process by which React updates the DOM. This is crucial for React to efficiently handle changes in the application's state and props and update the UI accordingly.
 
-    ### 5. Keys
+   ### 1. Virtual DOM
 
-    When rendering a list of elements from an array, React uses the `key` prop to uniquely identify each element. This helps React in preserving and reusing DOM nodes correctly during the reconciliation process. It's essential to provide a `key` prop when mapping over an array to generate JSX.
+   React maintains a virtual representation of the DOM, known as the **Virtual DOM**. When a change occurs in a component's state or props, React creates a new Virtual DOM tree.
 
-    ### 6. Algorithm
+   ### 2. Diffing
 
-    The reconciliation algorithm is efficient, standing at `O(n)`, where `n` is the number of elements in the tree. This allows React to be incredibly fast and efficient.
+   React then compares this new Virtual DOM tree with the previous one in a process called **diffing**. Through this comparison, React determines what has changed between the two trees.
 
-    > **Note:** It's essential to differentiate between reconciliation and rendering. Rendering is the process by which React creates the new Virtual DOM tree. Reconciliation, on the other hand, involves comparing this new tree with the previous one and making the necessary DOM updates.
+   ### 3. Minimal Updates
+
+   After the diffing process, React identifies the changes and instead of re-rendering the entire application, it **updates only the segments** of the real DOM that have changed. This ensures React's efficiency.
+
+   ### 4. Component Lifecycle
+
+   During reconciliation, React adheres to the **component lifecycle**. Methods like `shouldComponentUpdate` can be used to optimize and possibly skip parts of the reconciliation process if we determine a component hasn't changed.
+
+   ### 5. Keys
+
+   When rendering a list of elements from an array, React uses the `key` prop to uniquely identify each element. This helps React in preserving and reusing DOM nodes correctly during the reconciliation process. It's essential to provide a `key` prop when mapping over an array to generate JSX.
+
+   ### 6. Algorithm
+
+   The reconciliation algorithm is efficient, standing at `O(n)`, where `n` is the number of elements in the tree. This allows React to be incredibly fast and efficient.
+
+   > **Note:** It's essential to differentiate between reconciliation and rendering. Rendering is the process by which React creates the new Virtual DOM tree. Reconciliation, on the other hand, involves comparing this new tree with the previous one and making the necessary DOM updates.
 
 2. **useEffect 🚀**
-    - useEffect is used to render a API cal when our Bsic UI is rendered
-    - useEffect() hook accepts 2 arguments:
 
-         ``` useEffect(callback[, dependencies]); ```
-        - callback is a function that contains the side-effect logic. callback is executed right after the DOM update.
-        - dependencies is an optional array of dependencies. useEffect() executes callback only if the dependencies have changed between renderings.
-        - Put your side-effect logic into the callback function, then use the dependencies argument to control when you want the side-effect to run. That's the sole purpose of useEffect().
+   - useEffect is used to render a API cal when our Bsic UI is rendered
+   - useEffect() hook accepts 2 arguments:
+
+     `useEffect(callback[, dependencies]);`
+
+     - callback is a function that contains the side-effect logic. callback is executed right after the DOM update.
+     - dependencies is an optional array of dependencies. useEffect() executes callback only if the dependencies have changed between renderings.
+     - Put your side-effect logic into the callback function, then use the dependencies argument to control when you want the side-effect to run. That's the sole purpose of useEffect().
+
+- implemented filter and search functionality using useState
+
+```
+  const searchFilter = () => {
+    const srchedRes = resList.filter((data) => {
+      return data.info.name.toLowerCase().includes(srchText.toLowerCase());
+    });
+    console.log("Filtered Results:", srchedRes);
+
+    srchedRes.length > 0
+      ? setFltrdList(srchedRes)
+      : alert("no Restaurant found");
+  };
+
+```

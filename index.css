@@ -21,6 +21,9 @@
     height:auto;
     margin: 5px;
     padding: 10px;
+    background-color: rgb(236, 227, 214);
+    border-radius: 10px;
+
 }
 .res-card > img{
     width: 200px;
@@ -51,4 +54,8 @@
 .filter-btn{
     margin: 10px;
     cursor: pointer;
+}
+
+.filter-bar{
+    display: flex;
 }

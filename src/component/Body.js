@@ -2,52 +2,98 @@ import RestaurantCard from "./RestaurantCard";
 import resObj from "../utils/mockData";
 import { useEffect, useState } from "react";
 
-const Body=()=>{
+const Body = () => {
+  const [resList, setResList] = useState([]);
+  const [fltrdList, setFltrdList] = useState([]);
+  const [srchText, setSrchText] = useState("");
 
-    // const [resList, setResList]= useState(resObj); this is correct but initially we need no data in our list
-    const [resList, setResList]= useState([]);
+  const [isFiltered, setIsFiltered] = useState(false);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    useEffect(()=>{
-        fetchData()
-    },[])
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
 
-    const fetchData=async ()=>{
-        const data=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+    const jsonOutput = await data.json();
 
-        const jsonOutput=await data.json();
+    console.log(jsonOutput);
+    setResList(
+      jsonOutput?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+    setFltrdList(
+      jsonOutput?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+  };
 
-        console.log(jsonOutput)
-        setResList(jsonOutput?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+  const filterRes = () => {
+    const topRated = resList.filter((data) => data.info.avgRating > 4.5);
+    setFltrdList(topRated); // Update state with filtered restaurants
+  };
+
+  const toggleFilter = () => {
+    if (isFiltered) {
+      // fetchData();  => this call was hitting api every time
+      setFltrdList(resList);
+    } else {
+      filterRes();
     }
+    setIsFiltered(!isFiltered);
+  };
 
-    // const filterRes=()=>{
-    //    return setResList( resObj.filter((data)=>{
-    //       if(data.info.avgRating>4){
-    //         return <RestaurantCard key={data.info.id} resInfo={data.info} ></RestaurantCard>
-    //       }
-    //     }))
-    // }
+  const searchFilter = () => {
+    const srchedRes = resList.filter((data) => {
+      return data.info.name.toLowerCase().includes(srchText.toLowerCase());
+    });
+    console.log("Filtered Results:", srchedRes);
 
-    const filterRes = () => {
-        const topRated = resObj.filter(data => data.info.avgRating > 4);
-        setResList(topRated); // Update state with filtered restaurants
-    }
+    srchedRes.length > 0
+      ? setFltrdList(srchedRes)
+      : alert("no Restaurant found");
+  };
 
-    return(
-        <div className="body">
-            <div className="search">Search</div>
-            <button onClick={()=>{filterRes()}} className="filter-btn">Top 🌟 Restaurants</button>
-            <div className="res-container">
-                
-            {resList.map(data => (
-                    <RestaurantCard key={data.info.id} resInfo={data.info} />
-                ))}
-               
-            </div>
+  return (
+    <div className="body">
+      <div className="filter-bar">
+        <div className="search">
+          <input
+            type="text"
+            value={srchText}
+            onChange={(e) => {
+              setSrchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              searchFilter();
+            }}
+          >
+            Search
+          </button>
         </div>
-    )
-}
 
+        <button
+          onClick={() => {
+            toggleFilter();
+          }}
+          className="filter-btn"
+        >
+          {isFiltered ? "Remove Filter ❌" : "Top 🌟 Restaurants"}
+        </button>
+      </div>
+
+      <div className="res-container">
+        {fltrdList.map((data) => (
+          <RestaurantCard key={data.info.id} resInfo={data.info} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default Body;
