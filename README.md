@@ -229,3 +229,12 @@ const RestaurantCard=(props)=>{
     The reconciliation algorithm is efficient, standing at `O(n)`, where `n` is the number of elements in the tree. This allows React to be incredibly fast and efficient.
 
     > **Note:** It's essential to differentiate between reconciliation and rendering. Rendering is the process by which React creates the new Virtual DOM tree. Reconciliation, on the other hand, involves comparing this new tree with the previous one and making the necessary DOM updates.
+
+2. **useEffect 🚀**
+    - useEffect is used to render a API cal when our Bsic UI is rendered
+    - useEffect() hook accepts 2 arguments:
+
+         ``` useEffect(callback[, dependencies]); ```
+        - callback is a function that contains the side-effect logic. callback is executed right after the DOM update.
+        - dependencies is an optional array of dependencies. useEffect() executes callback only if the dependencies have changed between renderings.
+        - Put your side-effect logic into the callback function, then use the dependencies argument to control when you want the side-effect to run. That's the sole purpose of useEffect().
