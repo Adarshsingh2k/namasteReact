@@ -364,3 +364,103 @@ const RestaurantCard=(props)=>{
    const { id } = useParams();
 
    ```
+
+## Day 6
+
+> ** Class Bsed Component 🚀**
+
+1.  `Creating a class based component`
+
+        ```
+            import  { Component } from 'react';
+
+            class MyClassComponent extends Component {
+            render() {
+                return <div>My Class Component</div>;
+            }
+            }
+
+            export default MyClassComponent;
+
+        ```
+
+    Certainly! Here's a well-structured `README.md` for both the topics:
+
+---
+
+````
+# React Class Components: Props and Constructors
+
+## Table of Contents
+
+- [Props in React Class Components](#props-in-react-class-components)
+- [Using Constructors in React Class Components](#using-constructors-in-react-class-components)
+
+## Props in React Class Components
+
+Props (short for "properties") in React allow components to pass and receive data from each other. They are immutable and help components to be more dynamic and reusable.
+
+### Basic Usage:
+
+```javascript
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+
+// Using the component:
+<Welcome name="React" />
+````
+
+### Detailed Explanation:
+
+1. **Passing Props**: You can pass props to a component when using it:
+
+   ```javascript
+   <Welcome name="React" />
+   ```
+
+2. **Accessing Props**: Inside the class component, you can access the passed props via `this.props`.
+
+3. **Props are Immutable**: Once passed into a component, props cannot be modified inside the receiving component.
+
+## Using Constructors in React Class Components
+
+### What is a constructor?
+
+A constructor is a special method used for creating and initializing an object. In React, the constructor for a class component initializes state and binds event handler methods.
+
+### Why and when to use constructors?
+
+1. **Initializing State**: If your component has state that isn't derived from props, you'll initialize it in the constructor.
+
+   ```javascript
+   constructor(props) {
+     super(props);
+     this.state = {
+       count: 0
+     };
+   }
+   ```
+
+2. **Binding Event Handlers**: If you're using methods that need to access `this` and aren't using arrow functions, you'll need to bind them in the constructor.
+
+3. **Passing Props to the Super Class**: Ensure `this.props` is set before any other statements are executed by passing `props` to the super class.
+
+### When can you skip the constructor?
+
+1. **State Initialization**: With the class fields proposal, you can initialize state outside the constructor.
+2. **Arrow Functions**: If you use arrow functions for your methods, you don't need to bind them in the constructor.
+3. **Functional Components**: With the introduction of hooks, functional components can now handle state, reducing the need for class components.
+
+---
+
+**Note**: While constructors play an important role in React class components, newer features and patterns have reduced the need for them. However, understanding constructors and their use cases remains crucial in certain projects.
+
+```
+
+---
+
+You can use the above markdown code in your `README.md`. When rendered on platforms like GitHub, it will appear well-structured and formatted.
+```
