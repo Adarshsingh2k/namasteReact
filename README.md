@@ -278,18 +278,17 @@ const RestaurantCard=(props)=>{
 ## Day 5
 
 1.  **useEffect** (continued..):
+
     - if no dependancy array is present => useEffect is called on every render
     - if dependency array is empty [] => useEffect is called on intial render (just once)
     - if dependency array has any dependency=> it will only be called evertime deppendency component is updated
+
       ```
       useEffect(() => {
       fetchData();
       }, [btnComponent]);
 
       ```
-    ```
-
-    ```
 
 ## Server-side vs Client-side Routing
 
@@ -299,3 +298,69 @@ const RestaurantCard=(props)=>{
 | **Advantages**    | - Better for SEO<br>- Initial page loads can be faster for first-time visitors.   | - Faster subsequent page transitions after initial load<br>- Enhanced user experiences like animations.      |
 | **Disadvantages** | - Slower subsequent page transitions<br>- More server resources for each request. | - Slower initial page load due to larger bundle size<br>- Potential SEO challenges if not handled correctly. |
 | **Examples**      | PHP, ASP.NET, Ruby on Rails, Django                                               | React (with React Router), Angular, Vue.js                                                                   |
+
+2. Routing In React using React-Router-Dom - React Router Dom Gives lots of easy way to handle routing - We can easily declare child Route, Parent Route and Error Route like this Using `CreateBrowserRoute()`
+
+   ```
+   const appRouter = createBrowserRouter([
+   {
+    path: "/",
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/restaurant/:id",
+        element: <RestaurantMenu />,
+      },
+    ],
+    errorElement: <Error />,
+   },
+   ]);
+   ```
+
+   - Rather then using Hrf or Anchor tag we should use <Link> tag for passing routes-> it supports SPA
+
+   ```
+     <div className="nav-items">
+        <ul>
+          <li>
+            <Link to="/"> Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
+          <li>Cart</li>
+        </ul>
+      </div>
+
+   ```
+
+   - useParams Hook is used to pass dynamic params to route
+
+   ```
+   <Link key={data.info.id} to={"restaurant/" + data.info.id}>
+            <RestaurantCard resInfo={data.info} />
+          </Link>
+
+   ```
+
+   `Consuming Param`
+
+   ```
+   const { id } = useParams();
+
+   ```
