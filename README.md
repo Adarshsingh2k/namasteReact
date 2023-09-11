@@ -329,7 +329,7 @@ const RestaurantCard=(props)=>{
    ]);
    ```
 
-   - Rather then using Hrf or Anchor tag we should use <Link> tag for passing routes-> it supports SPA
+   - Rather then using Hrf or Anchor tag we should use `<Link>` tag for passing routes-> it supports SPA
 
    ```
      <div className="nav-items">
