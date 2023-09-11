@@ -1,27 +1,32 @@
+import { useEffect } from "react";
 import { LOGO_URL } from "../utils/constant";
+import { Link } from "react-router-dom";
+import Body from "./Body";
 
-const Header=()=>{
-    return(
-        <div className="header">
-            <div className="logo-container">
-                <img className="logo" src={LOGO_URL}/>
+const Header = () => {
+  useEffect(() => {}, []);
+  return (
+    <div className="header">
+      <div className="logo-container">
+        <img className="logo" src={LOGO_URL} />
+      </div>
 
-            </div>
+      <div className="nav-items">
+        <ul>
+          <li>
+            <Link to="/"> Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
+          <li>Cart</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
 
-            <div className="nav-items">
-                <ul>
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
-                    <li>Cart</li>
-                   
-
-                </ul>
-
-            </div>
-
-        </div>
-    )
-}
-
-export default  Header;
+export default Header;
