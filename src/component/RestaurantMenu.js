@@ -23,15 +23,15 @@ const RestaurantMenu = () => {
   const { title, itemCards } = card?.card?.card || {};
 
   return (
-    <div className="menu">
-      <h1>
+    <div className="menu ">
+      <h1 className="font-extrabold text-4xl">
         {name} - {avgRatingString}⭐
       </h1>
       <h3>{costForTwoMessage}</h3>
       <br></br>
 
-      <h2>menu</h2>
-      <h3>{title}</h3>
+      <h2 className="font-extrabold">menu</h2>
+      <h3 className="font-extrabold">{title}</h3>
       <br></br>
       <ul>
         {itemCards.map((item) => {

@@ -67,9 +67,10 @@ const Body = () => {
 
   return (
     <div className="body">
-      <div className="filter-bar">
-        <div className="search">
+      <div className="filter-bar flex m-10 justify-around">
+        <div className="search ">
           <input
+            className="border border-solid border-black"
             type="text"
             value={srchText}
             onChange={(e) => {
@@ -77,25 +78,26 @@ const Body = () => {
             }}
           />
           <button
+            className="m-2 px-4 py-1 bg-green-200"
             onClick={() => {
               searchFilter();
             }}
           >
             Search
           </button>
-        </div>
 
-        <button
-          onClick={() => {
-            toggleFilter();
-          }}
-          className="filter-btn"
-        >
-          {isFiltered ? "Remove Filter ❌" : "Top 🌟 Restaurants"}
-        </button>
+          <button
+            onClick={() => {
+              toggleFilter();
+            }}
+            className="filter-btn bg-red-200 p-1 mx-1 rounded"
+          >
+            {isFiltered ? "Remove Filter ❌" : "Top 🌟 Restaurants"}
+          </button>
+        </div>
       </div>
 
-      <div className="res-container">
+      <div className="res-container flex flex-wrap justify-center">
         {fltrdList.map((data) => (
           <Link key={data.info.id} to={"restaurant/" + data.info.id}>
             <RestaurantCard resInfo={data.info} />
