@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import resObj from "../utils/mockData";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [resList, setResList] = useState([]);
@@ -31,6 +32,12 @@ const Body = () => {
         ?.restaurants
     );
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false) return <h1>You are offline</h1>;
+
+  if (fltrdList === null) return <h1>Loading....</h1>;
 
   const filterRes = () => {
     const topRated = resList.filter((data) => data.info.avgRating > 4.5);

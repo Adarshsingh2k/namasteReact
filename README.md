@@ -467,3 +467,63 @@ You can use the above markdown code in your `README.md`. When rendered on platfo
 
 2. Understanding Seting state a and calling API's and Lifecycle functions in CBC
    https://drive.google.com/file/d/1feiOyAHjkXmTwaOOL0GsTTGK6sXChD2d/view?pli=1
+
+## Day 7
+
+1.  **Custom Hooks**
+
+- Custom hooks are nothing just a simple funtion which helps in keeping our app modular and follow Single Responsibility Principle
+
+`useOnlineStatus() Custom Hook`
+
+```
+  import { useEffect, useState } from "react";
+
+  const useOnlineStatus = () => {
+    //   try check if online
+    const [onlineStatus, setOnlineStatus] = useState(true);
+    useEffect(() => {
+      window.addEventListener("offline", () => {
+        setOnlineStatus(false);
+      });
+
+      window.addEventListener("online", () => {
+        setOnlineStatus(true);
+      });
+    }, []);
+
+    return onlineStatus;
+  };
+
+  export default useOnlineStatus;
+
+```
+
+`Usage`
+
+```
+const onlineStatus = useOnlineStatus();
+
+```
+
+2. **Lazy Loading/ Chunking 💔**
+
+`Syntax`
+
+```
+  // import Like this
+  const Grocery = lazy(() => import("./component/Grocery"));
+
+  // Use Like this
+   {
+      path: "/grocery",
+      element: (
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Grocery />
+        </Suspense>
+      ),
+    },
+
+```
+
+- Fallbacks can be a component or just a tag it is used because React is too fast and if we Don't use Suspense and Fallback it will not be able to load are lazy component.
