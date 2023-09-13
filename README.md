@@ -527,3 +527,35 @@ const onlineStatus = useOnlineStatus();
 ```
 
 - Fallbacks can be a component or just a tag it is used because React is too fast and if we Don't use Suspense and Fallback it will not be able to load are lazy component.
+
+## Day 8
+
+1. **Higher Order Component**
+
+   - these are component which take a component do some enhancements and return a component
+   - but we do not change anything in our original component
+
+`MAKING a HOC`
+
+```
+ export const withPromotedLabel = (RestaurantCard) => {
+   return (props) => {
+     return (
+       <div>
+         <label className="bg-green-200 rounded-lg absolute ms-5 italic mt-2 p-2">
+           Open
+         </label>
+         <RestaurantCard {...props} />
+       </div>
+     );
+   };
+ };
+
+```
+
+`Consuming HOC`
+
+```
+ const PromotedCard = withPromotedLabel(RestaurantCard);
+
+```

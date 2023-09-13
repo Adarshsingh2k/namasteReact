@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import resObj from "../utils/mockData";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -10,6 +10,8 @@ const Body = () => {
   const [srchText, setSrchText] = useState("");
 
   const [isFiltered, setIsFiltered] = useState(false);
+
+  const PromotedCard = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -100,7 +102,11 @@ const Body = () => {
       <div className="res-container flex flex-wrap justify-center">
         {fltrdList.map((data) => (
           <Link key={data.info.id} to={"restaurant/" + data.info.id}>
-            <RestaurantCard resInfo={data.info} />
+            {data.info.isOpen ? (
+              <PromotedCard resInfo={data.info} />
+            ) : (
+              <RestaurantCard resInfo={data.info} />
+            )}
           </Link>
         ))}
       </div>
