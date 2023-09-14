@@ -633,7 +633,7 @@ const onlineStatus = useOnlineStatus();
 
    ***
 
-3. ** Lifting State Up in React **
+3. **Lifting State Up in React**
 
    "Lifting state up" refers to the practice of placing shared state in a common ancestor component. This allows multiple components to share and manipulate the state, ensuring consistent behavior and data flow.
 
@@ -691,3 +691,144 @@ const onlineStatus = useOnlineStatus();
 
    - **Consistency**: By centralizing the state, you ensure that all components that depend on it are consistent in behavior and data.
    - **Simplified Data Flow**: Data flows in a single, clear direction, making debugging and data tracking easier.
+
+4. **Context API**
+
+   - Context API is used to remove the problem of passing props from parent to child component which have to many components in between or Issue of Prop Drilling
+   - In Context API we maintain a Global State and we can update it or get state dat in any component where needed
+
+   `Creating Context using createContext`
+
+   ```
+   import { createContext } from "react";
+
+   const UserContext = createContext({
+     // default value
+     loggedInUser: "default",
+   });
+
+   export default UserContext;
+
+   ```
+
+   `Consuming Context using useContext Hook`
+
+   ```
+   const loggedUserContext = useContext(UserContext);
+
+   ```
+
+   `Consuming Inside Class Based Component`
+
+   ```
+     <div>
+          loggedInUser
+          <UserContext.Consumer>
+            {({ loggedInUser }) => <h1>{loggedInUser}</h1>}
+          </UserContext.Consumer>
+        </div>
+   ```
+
+   `Updating Value of Context (.Provider)`
+
+   ```
+   // this wiil give updated value only on all components
+   // loggedInUser -> is our global state of context getting updated by userName  which is a state variable
+
+   <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+       <div className="app">
+         <Header />
+         <Outlet />
+       </div>
+     </UserContext.Provider>
+
+   ```
+
+   ```
+   // this wiil give updated value only on  header
+   <div className="app">
+   <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+     <Header />
+   </UserContext.Provider>
+
+     <Outlet />
+   </div>
+   ```
+
+   `Dynamically Updating Value of context `
+
+   - so basically we are accesing the useState varaibles which we passed from our Provie -> (UserContext.Provider) and using setUserName() we can update it as any state variable
+
+   ```
+   const { loggedInUser, setUserName } = useContext(UserContext);
+
+    <div className="search m-4 p-4 flex items-center">
+          <label>UserName : </label>
+          <input
+            className="border border-black p-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
+   ```
+
+   ## React's Context API & Lifting State Up: A Deeper Dive
+
+React's Context API and the practice of Lifting State Up are advanced techniques that facilitate efficient data sharing and state management in applications, especially as they grow in complexity.
+
+### 1. Why the Context API?
+
+In larger React applications, passing data between components (especially those far apart in the component tree) becomes cumbersome. This is often referred to as "prop drilling", where data is passed through many components that don't necessarily need it, just so it reaches a component deep down in the tree. Context API offers a solution by allowing data to be shared across components without explicit prop passing.
+
+### 2. Creating & Initializing Context:
+
+Before you can provide or consume context, you need to create it. This is done using the `createContext` function. The value you pass to `createContext` will be the default value for the context.
+
+```javascript
+import { createContext } from "react";
+const UserContext = createContext({
+  loggedInUser: "default",
+});
+```
+
+### 3. Providing Context:
+
+Once the context is created, the next step is to provide it to the components that need it. This is done using the `Provider` component that comes with every Context object.
+
+In our example, the `AppLayout` component in `app.js` acts as the context provider:
+
+```javascript
+<UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+  // ... child components go here ...
+</UserContext.Provider>
+```
+
+The `value` prop on the `Provider` is what will be accessible to any nested component that consumes this context.
+
+### 4. Consuming Context:
+
+Components nested inside a `Provider` can access the context value without it being passed explicitly as a prop. The `useContext` hook provides a way to tap into this value:
+
+```javascript
+const { loggedInUser, setUserName } = useContext(UserContext);
+```
+
+### 5. Lifting State Up:
+
+When you have multiple components that need to share and modify the same data, it's often beneficial to move that state to their nearest common ancestor. This practice is known as "Lifting State Up".
+
+In our case, the `userName` state is managed in the `AppLayout` component (`app.js`), even though it's the `Body` component (`Body.js`) that uses and modifies it. By lifting the state up to `AppLayout`, it can be easily shared with any other component using the Context API.
+
+### 6. Benefits of Lifting State Up with Context API:
+
+- **Single Source of Truth**: Centralizes the state management, reducing inconsistencies and bugs.
+- **Avoid Prop Drilling**: Data can be shared across the component tree without having to pass it down through intermediate components.
+- **Encapsulation**: Components can be more self-contained, not having to rely on props passed from multiple levels up.
+
+### 7. Considerations:
+
+While the Context API provides a powerful tool for state management, it's essential to use it judiciously:
+
+- **Overhead**: It might be an overkill for simple state management tasks. Local component state or simple prop passing might suffice.
+- **Re-renders**: Remember that consuming components will re-render when the context value changes, which can have performance implications.
+- **Use with Other Patterns**: Context API can be effectively combined with other patterns and libraries, like reducers (with `useReducer`) or state management libraries like Redux.

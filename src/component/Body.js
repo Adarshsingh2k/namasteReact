@@ -1,7 +1,9 @@
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import resObj from "../utils/mockData";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
+
 import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
@@ -10,6 +12,8 @@ const Body = () => {
   const [srchText, setSrchText] = useState("");
 
   const [isFiltered, setIsFiltered] = useState(false);
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   const PromotedCard = withPromotedLabel(RestaurantCard);
 
@@ -96,6 +100,14 @@ const Body = () => {
           >
             {isFiltered ? "Remove Filter ❌" : "Top 🌟 Restaurants"}
           </button>
+        </div>
+        <div className="search m-4 p-4 flex items-center">
+          <label>UserName : </label>
+          <input
+            className="border border-black p-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
       </div>
 
