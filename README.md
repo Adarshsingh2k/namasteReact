@@ -832,3 +832,7 @@ While the Context API provides a powerful tool for state management, it's essent
 - **Overhead**: It might be an overkill for simple state management tasks. Local component state or simple prop passing might suffice.
 - **Re-renders**: Remember that consuming components will re-render when the context value changes, which can have performance implications.
 - **Use with Other Patterns**: Context API can be effectively combined with other patterns and libraries, like reducers (with `useReducer`) or state management libraries like Redux.
+
+## Day 10
+
+![Alt text](image.png)
