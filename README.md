@@ -1045,20 +1045,37 @@ In this example, `cartSlice` defines the initial state, actions, and reducers fo
 
 Components can interact with the Redux store in two primary ways:
 
-1. **Reading from the Store**: Components can read data from the Redux store using the `useSelector` hook.
+1.  **Reading from the Store**: Components can read data from the Redux store using the `useSelector` hook.
 
-   ```javascript
-   const cartItems = useSelector((store) => store.cart.items);
-   ```
+    ```javascript
+    const cartItems = useSelector((store) => store.cart.items);
+    ```
 
-2. **Dispatching Actions**: Components can dispatch actions to update the Redux store using the `useDispatch` hook.
+2.  **Dispatching Actions**: Components can dispatch actions to update the Redux store using the `useDispatch` hook.
 
-   ```javascript
-   const dispatch = useDispatch();
-   const handleClearCart = () => {
-     dispatch(deleteItem());
-   };
-   ```
+    ```javascript
+    const dispatch = useDispatch();
+    const handleClearCart = () => {
+      dispatch(deleteItem());
+    };
+    ```
+
+    ```javascript
+    const handleAddItem = (item) => {
+      dispatch(addItem(item));
+    };
+    ```
+
+        // here addItem reducer is taking action aprt as param
+        // take reference from this
+        ```javascript
+          addItem: (state, action) => {
+          state.items.push(action.payload);
+        ```
+
+    },
+
+```
 
 ### 4. Benefits of Using Redux:
 
@@ -1070,3 +1087,4 @@ Components can interact with the Redux store in two primary ways:
 - **Middleware and Enhancers**: Redux can be extended with middleware, offering a place between dispatching an action and the moment it reaches the reducer.
 
 ---
+```
