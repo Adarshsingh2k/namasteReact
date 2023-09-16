@@ -1066,16 +1066,13 @@ Components can interact with the Redux store in two primary ways:
     };
     ```
 
-        // here addItem reducer is taking action aprt as param
-        // take reference from this
+    > here addItem reducer is taking action aprt as param take reference from below
+
         ```javascript
           addItem: (state, action) => {
           state.items.push(action.payload);
+        },
         ```
-
-    },
-
-```
 
 ### 4. Benefits of Using Redux:
 
@@ -1087,4 +1084,3 @@ Components can interact with the Redux store in two primary ways:
 - **Middleware and Enhancers**: Redux can be extended with middleware, offering a place between dispatching an action and the moment it reaches the reducer.
 
 ---
-```
